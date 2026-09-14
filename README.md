@@ -22,7 +22,7 @@ Tests conducted on legacy low-end hardware (Intel Pentium E2220 CPU @ 2.76GHz wi
 * With Better Chunk Culling: 27 FPS | 42/1936 Chunk sections rendered
 * Performance gain: +68% FPS increase and approximately 45% reduction in GPU load
 
-tesppp
+![comparacion](screenshots/comparacion.png)
 
 Left: Without mod + MixinBooter | Right: Without mod + MixinBooter + Better Chunk Culling (Same seed and coordinates)
 
