@@ -8,7 +8,7 @@ Minecraft's default system processes chunk sections in rigid rectangular blocks.
 
 To keep CPU usage to a minimum, it uses an optimized squared elliptical distance calculation without performing heavy square root operations:
 
-Distance ^2 = (dx)^2 + (dy * k)^2 + (dz)^2
+`Distance^2 = (dx)^2 + (dy * k)^2 + (dz)^2`
 
 Note: Because non-visible chunks are aggressively culled to maximize frame rates, in some cases minor lighting glitches or delays in block rendering updates may occur, so I recommend using the [Alfheim Lighting Engine](https://www.curseforge.com/minecraft/mc-mods/alfheim-lighting-engine) mod
 
