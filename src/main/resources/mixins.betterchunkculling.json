@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8.7",
+  "package": "com.oxnull.betterchunkculling.mixin",
+  "refmap": "mixins.betterchunkculling.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "MixinChunkRenderDispatcher",
+    "MixinEntityRenderer",
+    "MixinRenderGlobalVisibility"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

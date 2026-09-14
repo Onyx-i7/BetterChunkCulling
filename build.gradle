@@ -1,0 +1,79 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'GTNH Maven'
+            url = 'https://nexus.gtnewhorizons.com/repository/public/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.gtnewhorizons:retrofuturagradle:2.0.4'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'com.gtnewhorizons.retrofuturagradle'
+
+version = "1.0"
+group = "com.oxnull.betterchunkculling"
+
+base {
+    archivesName = 'BetterChunkCulling'
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+}
+
+minecraft {
+    mcVersion = '1.12.2'
+    username = 'Developer'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "SpongePowered"
+        url = "https://repo.spongepowered.org/repository/maven-public/"
+    }
+    maven {
+        name = 'CleanroomMC'
+        url = 'https://maven.cleanroommc.com'
+    }
+}
+
+dependencies {
+    def mixin = 'zone.rong:mixinbooter:11.17'
+
+    modUtils.enableMixins(mixin, 'mixins.betterchunkculling.refmap.json')
+
+    implementation(mixin) {
+        transitive = false
+    }
+    annotationProcessor mixin
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    def replaceProperties = [
+        version         : project.version.toString(),
+        'project.version': project.version.toString()
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['mcmod.info', 'pack.mcmeta']) {
+        expand(replaceProperties)
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
+    manifest {
+        attributes([
+            'MixinConfigs': 'mixins.betterchunkculling.json'
+        ])
+    }
+}
