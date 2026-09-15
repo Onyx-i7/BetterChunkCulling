@@ -30,7 +30,7 @@ public final class BCCConfig {
     })
     @Config.Name("verticalStretch")
     @Config.RangeDouble(min = 0.05D, max = 16.0D)
-    public static double verticalStretch = 0.5D;
+    public static volatile double verticalStretch = 0.5D;
 
     // Desactiva la niebla del juego completamente
     @Config.Comment({
@@ -40,7 +40,7 @@ public final class BCCConfig {
             "It may make the game look less atmospheric"
     })
     @Config.Name("noFog")
-    public static boolean noFog = true;
+    public static volatile boolean noFog = true;
 
     // Activa o desactiva los mensajes de debug en la consola
     @Config.Comment({
@@ -50,7 +50,7 @@ public final class BCCConfig {
             "Disable to reduce console spam"
     })
     @Config.Name("debug")
-    public static boolean debug = false;
+    public static volatile boolean debug = false;
 
     // Actualiza la configuracion si se cambia
     @Mod.EventBusSubscriber(
@@ -63,6 +63,10 @@ public final class BCCConfig {
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
             if (BetterChunkCulling.MODID.equals(event.getModID())) {
                 ConfigManager.sync(BetterChunkCulling.MODID, Config.Type.INSTANCE);
+                
+                java.util.concurrent.atomic.AtomicBoolean fence = 
+                    new java.util.concurrent.atomic.AtomicBoolean(false);
+                fence.get();
 
                 if (BetterChunkCulling.logger != null) {
                     BetterChunkCulling.logger.info(
