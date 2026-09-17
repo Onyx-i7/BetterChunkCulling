@@ -26,6 +26,12 @@ Tests conducted on legacy low-end hardware (Intel Pentium E2220 CPU @ 2.76GHz wi
 
 Left: Without mod + MixinBooter | Right: Without mod + MixinBooter + Better Chunk Culling (Same seed and coordinates)
 
+**Stress test (118 mods on potato PC)**
+- Without BCC: unstable 10-20 FPS with heavy lag spikes
+- With BCC: steady 20-30 FPS (minor drops to 13-15 FPS) 3D ellipsoidal culling removes unseen geometry to stabilize frame rates
+
+![prueba de rendimiento](screenshots/pruebaderendimientoenmimundo.png)
+
 **Notice**: This may not apply to all hardware configurations, but it worked in my case
 
 ---
